@@ -7,6 +7,7 @@ import "./globals.css";
 
 
 import Shell from "./common_component/Shell/page";
+import { AuthProvider } from "./context/AuthContext";
 
 
 const geistSans = Geist({
@@ -40,7 +41,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet"></link>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
