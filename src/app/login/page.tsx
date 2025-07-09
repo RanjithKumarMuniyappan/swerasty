@@ -2,11 +2,11 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { BookIcon } from '../components/Icons'
 
 
-const Login = () => {
+const LoginClient = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,8 +15,9 @@ const Login = () => {
     
     const { login } = useAuth();
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const from = searchParams.get('from') || '/';
+    
+    
+    
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,7 +33,7 @@ const Login = () => {
         const name = email.split('@')[0].replace(/[^a-zA-Z0-9]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
         login({ email, name });
-        router.replace(from);
+        router.replace('/');
     };
 
     return (
@@ -96,4 +97,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default LoginClient;
