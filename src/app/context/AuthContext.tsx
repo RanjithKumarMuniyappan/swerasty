@@ -1,4 +1,5 @@
 'use client';
+import Cookies from 'js-cookie';
 
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
@@ -9,7 +10,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (userData: User) => void;
+    login: (userData: User, tokens: { accessToken: string; refreshToken: string }) => void;
     logout: () => void;
     isAuthenticated: boolean;
 }
@@ -31,8 +32,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
     }, []);
 
-    const login = (userData: User) => {
+    const login = (userData: User, tokens: { accessToken: string; refreshToken: string }) => {
+        console.log("RecievedUserData : ", userData);
+        console.log("RecievedUserDataTokenA : ", tokens.accessToken);
+        console.log("RecievedUserDataTokenB : ", tokens.refreshToken);
+
+        
+
+        Cookies.set('accessToken', tokens.accessToken, { secure: true });
+        Cookies.set('refreshToken', tokens.refreshToken, { secure: true });
+
         localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('accessToken', tokens.accessToken);
+        localStorage.setItem('refreshToken', tokens.refreshToken);
         setUser(userData);
     };
 
