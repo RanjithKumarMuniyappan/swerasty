@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BookIcon } from '../components/Icons';
+import apiClient from '@/services/apiClient';
+import { createUser } from '@/services/signupApi';
 
 const RegisterPage: React.FC = () => {
     const router = useRouter();
@@ -24,12 +26,14 @@ const RegisterPage: React.FC = () => {
     const onSubmit = async (values: any, { setSubmitting }: any) => {
         try {
             console.log("Submitted: ", values);
-            // await API call
-            router.push('/login');
+            
+            const newUse = createUser(values)
+
         } catch (error: any) {
             console.error("Error:", error.message);
         } finally {
             setSubmitting(false);
+             router.push('/login');
         }
     };
 

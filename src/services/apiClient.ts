@@ -1,12 +1,12 @@
-// src/services/apiClient.ts
 import axios from 'axios';
 
+
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Example: https://api.example.com
+  baseURL: "http://localhost:5000/api/auth",
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true, // if cookies or sessions are involved
+  withCredentials: true,
 });
 
 

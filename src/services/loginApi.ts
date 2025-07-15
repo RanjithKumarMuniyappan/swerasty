@@ -1,7 +1,8 @@
 import apiClient from "./apiClient";
 
 
-export const login = (form: any) => {
-  return apiClient.post(`/login`, form);
+export const signIn = (form: any) => {
+  const response:any = apiClient.post(`/login`, form);
+  return response;
 };
 
